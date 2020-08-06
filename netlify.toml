@@ -1,7 +1,7 @@
 [build]
   base = ""
   publish = "build/"
-  command = "ENV_SILENT=true npm run build"
+  command = "cat .env.production | sed 's/^/export /' && ENV_SILENT=true npm run build"
 
 [[redirects]]
   from = "/*"

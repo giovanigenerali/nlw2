@@ -113,7 +113,7 @@ function TeacherForm() {
                 { value: "Eletrônica", label: "Eletrônica" },
                 { value: "Física", label: "Física" },
                 { value: "Química", label: "Química" },
-                { value: "Matemárica", label: "Matemárica" },
+                { value: "Matemática", label: "Matemática" },
               ]}
               value={subject}
               onChange={(event) => setSubject(event.target.value)}
