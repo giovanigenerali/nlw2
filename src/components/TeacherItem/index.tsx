@@ -1,39 +1,61 @@
-import React from 'react';
+import React from "react";
 
-import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import whatsappIcon from "../../assets/images/icons/whatsapp.svg";
 
-import './styles.css';
+import "./styles.css";
+import api from "../../services/api";
 
-function TeacherItem() {
+export interface Teacher {
+  id: number;
+  subject: string;
+  cost: number;
+  name: string;
+  avatar: string;
+  whatsapp: string;
+  bio: string;
+}
+
+interface TeacherItemProps {
+  teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+  function createNewConnection() {
+    api.post("/connections", {
+      user_id: teacher.id,
+    });
+  }
+
   return (
     <article className="teacher-item">
       <header>
-        <img src="https://avatars1.githubusercontent.com/u/41435?s=400&u=77d656c60446ae28b4a65657cd2714812fa38e13&v=4" alt="Giovani Generali"/>
+        <img src={teacher.avatar} alt={teacher.name} />
         <div>
-          <strong>Giovani Generali</strong>
-          <span>Eletrônica</span>
+          <strong>{teacher.name}</strong>
+          <span>{teacher.subject}</span>
         </div>
       </header>
 
-      <p>
-        Entusiasta das melhores tecnologias de eletrônica avançada.
-        <br /><br />
-        Apaixonado por desmontar coisas em laboratório e por mudar a vida das pessoas através de experiências tomando choque.
-      </p>
+      <p>{teacher.bio}</p>
 
       <footer>
         <p>
           Preço/hora
-          <strong>R$ 65,00</strong>
+          <strong>R$ {teacher.cost}</strong>
         </p>
 
-        <button type="button">
-          <img src={whatsappIcon} alt="Whatsapp"/>
+        <a
+          href={`http://wa.me/${teacher.whatsapp}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={createNewConnection}
+        >
+          <img src={whatsappIcon} alt="Whatsapp" />
           Entrar em contato
-        </button>
+        </a>
       </footer>
     </article>
-  )
-}
+  );
+};
 
 export default TeacherItem;
