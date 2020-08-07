@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 
+import api from "../../services/api";
+
 import PageHeader from "../../components/PageHeader";
 import TeacherItem, { Teacher } from "../../components/TeacherItem";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
 
 import "./styles.css";
-import api from "../../services/api";
 
 function TeacherList() {
   const [subject, setSubject] = useState("");
